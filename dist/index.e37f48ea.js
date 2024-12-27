@@ -596,20 +596,71 @@ function hmrAccept(bundle /*: ParcelRequire */ , id /*: string */ ) {
 }
 
 },{}],"aenu9":[function(require,module,exports,__globalThis) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 var _model = require("./model");
-var _modelDefault = parcelHelpers.interopDefault(_model);
 var _nav = require("./View/nav");
-console.log('Hello World');
+var _shop = require("./View/shop");
+const render = async function() {
+    await _model.loadData();
+    console.log(_model.state.items);
+};
+const init = function() {
+    render();
+};
+init();
 
-},{"./model":"Y4A21","./View/nav":"lKTMY","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"Y4A21":[function(require,module,exports,__globalThis) {
-console.log('Ho la this is model page');
-const sth = async function() {
+},{"./model":"Y4A21","./View/nav":"lKTMY","./View/shop":"en1n5"}],"Y4A21":[function(require,module,exports,__globalThis) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "state", ()=>state);
+parcelHelpers.export(exports, "loadData", ()=>loadData);
+const state = {
+    items: []
+};
+const loadData = async function() {
     const response = await fetch('https://fakestoreapi.com/products');
     const data = await response.json();
-    console.log(data);
+    data.forEach((item)=>{
+        state.items.push({
+            id: item.id,
+            category: item.category,
+            description: item.description,
+            price: item.price,
+            image: item.image,
+            title: item.title,
+            rating: item.rating
+        });
+    });
 };
-sth();
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"gkKU3":[function(require,module,exports,__globalThis) {
+exports.interopDefault = function(a) {
+    return a && a.__esModule ? a : {
+        default: a
+    };
+};
+exports.defineInteropFlag = function(a) {
+    Object.defineProperty(a, '__esModule', {
+        value: true
+    });
+};
+exports.exportAll = function(source, dest) {
+    Object.keys(source).forEach(function(key) {
+        if (key === 'default' || key === '__esModule' || Object.prototype.hasOwnProperty.call(dest, key)) return;
+        Object.defineProperty(dest, key, {
+            enumerable: true,
+            get: function() {
+                return source[key];
+            }
+        });
+    });
+    return dest;
+};
+exports.export = function(dest, destName, get) {
+    Object.defineProperty(dest, destName, {
+        enumerable: true,
+        get: get
+    });
+};
 
 },{}],"lKTMY":[function(require,module,exports,__globalThis) {
 const nav = document.querySelector('.nav');
@@ -650,35 +701,7 @@ switch(path){
         break;
 }
 
-},{}],"gkKU3":[function(require,module,exports,__globalThis) {
-exports.interopDefault = function(a) {
-    return a && a.__esModule ? a : {
-        default: a
-    };
-};
-exports.defineInteropFlag = function(a) {
-    Object.defineProperty(a, '__esModule', {
-        value: true
-    });
-};
-exports.exportAll = function(source, dest) {
-    Object.keys(source).forEach(function(key) {
-        if (key === 'default' || key === '__esModule' || Object.prototype.hasOwnProperty.call(dest, key)) return;
-        Object.defineProperty(dest, key, {
-            enumerable: true,
-            get: function() {
-                return source[key];
-            }
-        });
-    });
-    return dest;
-};
-exports.export = function(dest, destName, get) {
-    Object.defineProperty(dest, destName, {
-        enumerable: true,
-        get: get
-    });
-};
+},{}],"en1n5":[function(require,module,exports,__globalThis) {
 
 },{}]},["ik2hV","aenu9"], "aenu9", "parcelRequire94c2")
 
