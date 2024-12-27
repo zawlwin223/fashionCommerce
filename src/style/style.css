@@ -1,0 +1,36 @@
+@import url('./home/home_page.css');
+@import url('./shop/shop_page.css');
+@import url('./about/about_page.css');
+@import url('./contact/contact_page.css');
+@import url('./cart/cart_page.css');
+
+@import url('./home/nav.css');
+@import url('./home/hero.css');
+@import url('./home/service.css');
+@import url('./home/repair-service.css');
+@import url('./home/promotion.css');
+@import url('./home/signUp.css');
+@import url('./home/contact.css');
+
+@layer reset,default;
+@layer reset {
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+}
+@layer default {
+  :root {
+    --primary-color: #008080;
+    --secondary-color: #ff69b4;
+    --text-color: #131212;
+    --text-secondary-color: #696969;
+    --star-color: #ffd700;
+    --background-color: #f0f8f7;
+    --background-secondary-color: #140337;
+  }
+  body {
+    font-family: 'Roboto', 'Helvetica Neue', sans-serif;
+  }
+}
