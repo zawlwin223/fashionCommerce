@@ -25,7 +25,7 @@ switch (path) {
     // nav_links[0].classList.add('active')
     home_page.style.display = 'none'
 
-    shop_page.style.display = 'flex'
+    shop_page.style.display = 'block'
     break
   case '/about':
     home_page.style.display = 'none'

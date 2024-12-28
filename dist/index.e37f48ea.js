@@ -599,12 +599,12 @@ function hmrAccept(bundle /*: ParcelRequire */ , id /*: string */ ) {
 var _model = require("./model");
 var _nav = require("./View/nav");
 var _shop = require("./View/shop");
-const render = async function() {
+const renderShopItems = async function() {
     await _model.loadData();
-    console.log(_model.state.items);
+    _shop.renderItems(_model.state.items);
 };
 const init = function() {
-    render();
+    renderShopItems();
 };
 init();
 
@@ -685,7 +685,7 @@ switch(path){
     case '/shop':
         // nav_links[0].classList.add('active')
         home_page.style.display = 'none';
-        shop_page.style.display = 'flex';
+        shop_page.style.display = 'block';
         break;
     case '/about':
         home_page.style.display = 'none';
@@ -702,7 +702,39 @@ switch(path){
 }
 
 },{}],"en1n5":[function(require,module,exports,__globalThis) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "renderItems", ()=>renderItems);
+const itemsParent = document.querySelector('.items');
+const renderItems = function(items) {
+    console.log(itemsParent);
+    items.forEach((item)=>{
+        let card = `<div class="container">
+          <div class="image_section">
+            <img
+              src="${item.image}" />
 
-},{}]},["ik2hV","aenu9"], "aenu9", "parcelRequire94c2")
+            
+          </div>
+
+          <div class="product">
+            <p>${item.category}</p>
+            <h1>${item.title}</h1>
+            <h2>$${item.price}</h2>
+            <p class="desc">
+            ${item.desc}
+            </p>
+            <div class="buttons">
+              <button class="add">Add to Cart</button>
+              <button class="like"><span>\u{2665}</span></button>
+            </div>
+          </div>
+        </div>`;
+        console.log(card);
+        itemsParent.innerHTML += card;
+    });
+};
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}]},["ik2hV","aenu9"], "aenu9", "parcelRequire94c2")
 
 //# sourceMappingURL=index.e37f48ea.js.map
