@@ -616,10 +616,25 @@ parcelHelpers.export(exports, "loadData", ()=>loadData);
 const state = {
     items: []
 };
-const loadData = async function() {
-    const response = await fetch('https://fakestoreapi.com/products');
+const test = async function(params) {
+    const response = await fetch('https://fakestoreapi.com/products/category/jewelery');
     const data = await response.json();
-    data.forEach((item)=>{
+    console.log(data);
+};
+const loadData = async function() {
+    const urls = [
+        "https://fakestoreapi.com/products/category/men's clothing",
+        "https://fakestoreapi.com/products/category/women's clothing",
+        'https://fakestoreapi.com/products/category/jewelery'
+    ];
+    const responses = await Promise.all(urls.map((url)=>fetch(url)));
+    console.log(responses);
+    // console.log(response)
+    const data = await Promise.all(responses.map(async (response)=>{
+        return await response.json();
+    }));
+    const combinedData = data.flat();
+    combinedData.forEach((item)=>{
         state.items.push({
             id: item.id,
             category: item.category,
@@ -709,27 +724,19 @@ const itemsParent = document.querySelector('.items');
 const renderItems = function(items) {
     console.log(itemsParent);
     items.forEach((item)=>{
-        let card = `<div class="container">
-          <div class="image_section">
-            <img
-              src="${item.image}" />
-
-            
-          </div>
-
-          <div class="product">
-            <p>${item.category}</p>
-            <h1>${item.title}</h1>
-            <h2>$${item.price}</h2>
-            <p class="desc">
-            ${item.desc}
-            </p>
-            <div class="buttons">
-              <button class="add">Add to Cart</button>
-              <button class="like"><span>\u{2665}</span></button>
-            </div>
-          </div>
-        </div>`;
+        let card = `
+      <div class="item_card">
+        <img
+          src="${item.image}"
+          alt=""
+        />
+        <div class="detail">
+          <h3>${item.title}</h3>
+          <p>$${item.price}</p>
+          <button>Detail</button>
+        </div>
+      </div>
+    `;
         console.log(card);
         itemsParent.innerHTML += card;
     });
