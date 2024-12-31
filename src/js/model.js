@@ -1,15 +1,7 @@
 export const state = {
   items: [],
 }
-
-const test = async function (params) {
-  const response = await fetch(
-    'https://fakestoreapi.com/products/category/jewelery'
-  )
-  const data = await response.json()
-  console.log(data)
-}
-// test()
+// const itemsPerPage = 8
 
 export const loadData = async function () {
   const urls = [
@@ -38,4 +30,23 @@ export const loadData = async function () {
       rating: item.rating,
     })
   })
+
+  state.totalItems = state.items.length
+  state.itemsPerPage = 8
+  state.totalPages = Math.ceil(state.totalItems / state.itemsPerPage)
+}
+
+export const paginate = function (currentPage) {
+  // const totalItems = state.items.length
+  // const totalPages = Math.ceil(totalItems / itemsPerPage)
+  if (currentPage < 1 || currentPage > state.totalPages) {
+    console.log('Error')
+    return { error: 'Invalid page number' }
+  }
+
+  const startIndex = (currentPage - 1) * state.itemsPerPage
+  const endIndex = Math.min(startIndex + state.itemsPerPage, state.totalItems)
+  const items = state.items.slice(startIndex, endIndex)
+
+  return items
 }

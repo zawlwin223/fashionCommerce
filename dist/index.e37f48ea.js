@@ -601,10 +601,15 @@ var _nav = require("./View/nav");
 var _shop = require("./View/shop");
 const renderShopItems = async function() {
     await _model.loadData();
-    _shop.renderItems(_model.state.items);
+    _shop.renderPagination(_model.state.totalPages);
+    _shop.renderItems(_model.paginate(1));
+};
+const paginationController = async function(pageNumber) {
+    _shop.renderItems(_model.paginate(pageNumber));
 };
 const init = function() {
     renderShopItems();
+    _shop.paginationHandler(paginationController);
 };
 init();
 
@@ -613,13 +618,9 @@ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "state", ()=>state);
 parcelHelpers.export(exports, "loadData", ()=>loadData);
+parcelHelpers.export(exports, "paginate", ()=>paginate);
 const state = {
     items: []
-};
-const test = async function(params) {
-    const response = await fetch('https://fakestoreapi.com/products/category/jewelery');
-    const data = await response.json();
-    console.log(data);
 };
 const loadData = async function() {
     const urls = [
@@ -645,6 +646,23 @@ const loadData = async function() {
             rating: item.rating
         });
     });
+    state.totalItems = state.items.length;
+    state.itemsPerPage = 8;
+    state.totalPages = Math.ceil(state.totalItems / state.itemsPerPage);
+};
+const paginate = function(currentPage) {
+    // const totalItems = state.items.length
+    // const totalPages = Math.ceil(totalItems / itemsPerPage)
+    if (currentPage < 1 || currentPage > state.totalPages) {
+        console.log('Error');
+        return {
+            error: 'Invalid page number'
+        };
+    }
+    const startIndex = (currentPage - 1) * state.itemsPerPage;
+    const endIndex = Math.min(startIndex + state.itemsPerPage, state.totalItems);
+    const items = state.items.slice(startIndex, endIndex);
+    return items;
 };
 
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"gkKU3":[function(require,module,exports,__globalThis) {
@@ -720,9 +738,13 @@ switch(path){
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "renderItems", ()=>renderItems);
+parcelHelpers.export(exports, "renderPagination", ()=>renderPagination);
+parcelHelpers.export(exports, "paginationHandler", ()=>paginationHandler);
 const itemsParent = document.querySelector('.items');
+const paginationParent = document.querySelector('.pagnination');
 const renderItems = function(items) {
-    console.log(itemsParent);
+    itemsParent.innerHTML = '';
+    console.log(items);
     items.forEach((item)=>{
         let card = `
       <div class="item_card">
@@ -737,9 +759,29 @@ const renderItems = function(items) {
         </div>
       </div>
     `;
-        console.log(card);
         itemsParent.innerHTML += card;
     });
+};
+const renderPagination = function(totalPage) {
+    const buttonParent = paginationParent.querySelector('.pagni_number');
+    for(let i = 1; i <= totalPage; i++)buttonParent.innerHTML += `
+     <button class="page" data-page="${i}">${i}</button>
+    `;
+    buttonParent.firstElementChild.classList.add('active');
+};
+const paginationHandler = function(control) {
+    console.log(paginationParent);
+    paginationParent.addEventListener('click', function(e) {
+        this.querySelectorAll('.page').forEach((page)=>{
+            page.classList.remove('active');
+        });
+        const target = e.target.closest('.page');
+        if (!target) return;
+        const pageNumber = +target.dataset.page;
+        control(pageNumber);
+        target.classList.add('active');
+    });
+    console.log('Pagination');
 };
 
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}]},["ik2hV","aenu9"], "aenu9", "parcelRequire94c2")
