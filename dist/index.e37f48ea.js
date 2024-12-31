@@ -598,27 +598,33 @@ function hmrAccept(bundle /*: ParcelRequire */ , id /*: string */ ) {
 },{}],"aenu9":[function(require,module,exports,__globalThis) {
 var _model = require("./model");
 var _nav = require("./View/nav");
+var _detail = require("./View/detail");
 var _shop = require("./View/shop");
 const renderShopItems = async function() {
     await _model.loadData();
     _shop.renderPagination(_model.state.totalPages);
     _shop.renderItems(_model.paginate(1));
+    _detail.getItem(getProductDetailController);
 };
 const paginationController = async function(pageNumber) {
     _shop.renderItems(_model.paginate(pageNumber));
 };
-const init = function() {
+const getProductDetailController = function(id) {
+    _model.detailProduct(id);
+};
+const init = function async() {
     renderShopItems();
     _shop.paginationHandler(paginationController);
 };
 init();
 
-},{"./model":"Y4A21","./View/nav":"lKTMY","./View/shop":"en1n5"}],"Y4A21":[function(require,module,exports,__globalThis) {
+},{"./model":"Y4A21","./View/nav":"lKTMY","./View/shop":"en1n5","./View/detail":"jQoZk"}],"Y4A21":[function(require,module,exports,__globalThis) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "state", ()=>state);
 parcelHelpers.export(exports, "loadData", ()=>loadData);
 parcelHelpers.export(exports, "paginate", ()=>paginate);
+parcelHelpers.export(exports, "detailProduct", ()=>detailProduct);
 const state = {
     items: []
 };
@@ -664,6 +670,10 @@ const paginate = function(currentPage) {
     const items = state.items.slice(startIndex, endIndex);
     return items;
 };
+const detailProduct = function(id) {
+    const detailItem = state.items.find((item)=>item.id == id);
+    console.log(detailItem);
+};
 
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"gkKU3":[function(require,module,exports,__globalThis) {
 exports.interopDefault = function(a) {
@@ -707,6 +717,7 @@ const shop_page = document.querySelector('.shop_page');
 const about_page = document.querySelector('.about_page');
 const contact_page = document.querySelector('.contact_page');
 const cart_page = document.querySelector('.cart_page');
+const detail_page = document.querySelector('.detail_page');
 const path = window.location.pathname;
 switch(path){
     case '/':
@@ -732,6 +743,10 @@ switch(path){
         home_page.style.display = 'none';
         cart_page.style.display = 'flex';
         break;
+    case '/detail':
+        home_page.style.display = 'none';
+        detail_page.style.display = 'flex';
+        break;
 }
 
 },{}],"en1n5":[function(require,module,exports,__globalThis) {
@@ -755,7 +770,7 @@ const renderItems = function(items) {
         <div class="detail">
           <h3>${item.title}</h3>
           <p>$${item.price}</p>
-          <button>Detail</button>
+          <a href="detail?id=${item.id}">Detail</a>
         </div>
       </div>
     `;
@@ -782,6 +797,19 @@ const paginationHandler = function(control) {
         target.classList.add('active');
     });
     console.log('Pagination');
+};
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"jQoZk":[function(require,module,exports,__globalThis) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "getItem", ()=>getItem);
+const params = new URLSearchParams(window.location.search);
+const id = params.get('id');
+console.log(id) // "17"
+;
+const getItem = function(control) {
+    if (!id) return;
+    control(id);
 };
 
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}]},["ik2hV","aenu9"], "aenu9", "parcelRequire94c2")

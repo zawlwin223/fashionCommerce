@@ -50,3 +50,8 @@ export const paginate = function (currentPage) {
 
   return items
 }
+
+export const detailProduct = function (id) {
+  const detailItem = state.items.find((item) => item.id == id)
+  console.log(detailItem)
+}

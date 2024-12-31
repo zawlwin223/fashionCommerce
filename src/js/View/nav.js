@@ -10,6 +10,7 @@ const shop_page = document.querySelector('.shop_page')
 const about_page = document.querySelector('.about_page')
 const contact_page = document.querySelector('.contact_page')
 const cart_page = document.querySelector('.cart_page')
+const detail_page = document.querySelector('.detail_page')
 
 const path = window.location.pathname
 switch (path) {
@@ -24,7 +25,6 @@ switch (path) {
   case '/shop':
     // nav_links[0].classList.add('active')
     home_page.style.display = 'none'
-
     shop_page.style.display = 'block'
     break
   case '/about':
@@ -38,5 +38,9 @@ switch (path) {
   case '/cart':
     home_page.style.display = 'none'
     cart_page.style.display = 'flex'
+    break
+  case '/detail':
+    home_page.style.display = 'none'
+    detail_page.style.display = 'flex'
     break
 }
