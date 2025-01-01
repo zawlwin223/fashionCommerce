@@ -8,6 +8,7 @@ const renderShopItems = async function () {
   shop.renderPagination(model.state.totalPages)
   shop.renderItems(model.paginate(1))
   detail.getItem(getProductDetailController)
+  detail.renderItem(model.state.detailItem)
 }
 
 const paginationController = async function (pageNumber) {

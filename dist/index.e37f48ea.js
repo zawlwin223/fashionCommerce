@@ -605,6 +605,7 @@ const renderShopItems = async function() {
     _shop.renderPagination(_model.state.totalPages);
     _shop.renderItems(_model.paginate(1));
     _detail.getItem(getProductDetailController);
+    _detail.renderItem(_model.state.detailItem);
 };
 const paginationController = async function(pageNumber) {
     _shop.renderItems(_model.paginate(pageNumber));
@@ -672,6 +673,7 @@ const paginate = function(currentPage) {
 };
 const detailProduct = function(id) {
     const detailItem = state.items.find((item)=>item.id == id);
+    state.detailItem = detailItem;
     console.log(detailItem);
 };
 
@@ -803,13 +805,40 @@ const paginationHandler = function(control) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "getItem", ()=>getItem);
+parcelHelpers.export(exports, "renderItem", ()=>renderItem);
+const detail_page = document.querySelector('.detail_page');
 const params = new URLSearchParams(window.location.search);
 const id = params.get('id');
-console.log(id) // "17"
-;
 const getItem = function(control) {
     if (!id) return;
     control(id);
+};
+const renderItem = function(data) {
+    const html = `<div class="image_part">
+        <img
+          src="${data.image}"
+          alt="" />
+      </div>
+      <article class="detail_info">
+        <span>${data.category}</span>
+        <h2>${data.title}</h2>
+        <p class="price">$${data.price}</p>
+        <select value="Select Size" name="" id="">
+          <option value="">M</option>
+          <option value="">S</option>
+          <option value="">L</option>
+          <option value="">XL</option>
+        </select>
+        <div>
+          <input type="number" />
+          <button>Add To Cart</button>
+        </div>
+        <h3>Product Description</h3>
+        <p>
+         ${data.description}
+        </p>
+      </article>`;
+    detail_page.innerHTML = html;
 };
 
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}]},["ik2hV","aenu9"], "aenu9", "parcelRequire94c2")
