@@ -1,5 +1,6 @@
 const nav = document.querySelector('.nav')
 const nav_links = document.querySelectorAll('.nav_link')
+const badge = document.querySelector('.badge')
 // const hero = document.querySelector('.hero')
 // const promotion = document.querySelector('.promotion')
 // const repairService = document.querySelector('.repair_service')
@@ -44,3 +45,15 @@ switch (path) {
     detail_page.style.display = 'flex'
     break
 }
+
+const addBadge = function () {
+  const cart = JSON.parse(localStorage.getItem('cart'))
+  console.log(cart)
+  if (!cart) {
+    badge.style.display = 'none'
+    return
+  }
+  badge.style.display = 'flex'
+  badge.textContent = cart.length
+}
+addBadge()

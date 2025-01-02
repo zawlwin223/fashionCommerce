@@ -30,6 +30,23 @@
   }
 }
 
+.nav ul li:last-child {
+  position: relative;
+}
+
+.badge {
+  display: none;
+  position: absolute;
+  /* display: flex; */
+  justify-content: center;
+  align-items: center;
+  background-color: red;
+  color: white;
+  padding: 5px 5px;
+  border-radius: 5px;
+  top: -18px;
+  right: -15px;
+}
 .menu-toggle {
   display: none;
   flex-direction: column;

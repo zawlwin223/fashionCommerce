@@ -244,6 +244,23 @@
   }
 }
 
+.nav ul li:last-child {
+  position: relative;
+}
+
+.badge {
+  color: #fff;
+  background-color: red;
+  border-radius: 5px;
+  justify-content: center;
+  align-items: center;
+  padding: 5px;
+  display: none;
+  position: absolute;
+  top: -18px;
+  right: -15px;
+}
+
 .menu-toggle {
   cursor: pointer;
   flex-direction: column;

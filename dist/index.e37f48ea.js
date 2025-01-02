@@ -710,6 +710,7 @@ exports.export = function(dest, destName, get) {
 },{}],"lKTMY":[function(require,module,exports,__globalThis) {
 const nav = document.querySelector('.nav');
 const nav_links = document.querySelectorAll('.nav_link');
+const badge = document.querySelector('.badge');
 // const hero = document.querySelector('.hero')
 // const promotion = document.querySelector('.promotion')
 // const repairService = document.querySelector('.repair_service')
@@ -750,6 +751,17 @@ switch(path){
         detail_page.style.display = 'flex';
         break;
 }
+const addBadge = function() {
+    const cart = JSON.parse(localStorage.getItem('cart'));
+    console.log(cart);
+    if (!cart) {
+        badge.style.display = 'none';
+        return;
+    }
+    badge.style.display = 'flex';
+    badge.textContent = cart.length;
+};
+addBadge();
 
 },{}],"en1n5":[function(require,module,exports,__globalThis) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
@@ -809,6 +821,7 @@ parcelHelpers.export(exports, "renderItem", ()=>renderItem);
 const detail_page = document.querySelector('.detail_page');
 const params = new URLSearchParams(window.location.search);
 const id = params.get('id');
+const badge = document.querySelector('.badge');
 let amount = 0;
 const getItem = function(control) {
     if (!id) return;
@@ -825,16 +838,16 @@ const renderItem = function(data) {
         <h2>${data.title}</h2>
         <p class="price">$${data.price}</p>
         <select value="Select Size" name="" class="size">
-          <option value="">M</option>
-          <option value="">S</option>
-          <option value="">L</option>
-          <option value="">XL</option>
+          <option value="M">M</option>
+          <option value="S">S</option>
+          <option value="L">L</option>
+          <option value="XL">XL</option>
         </select>
         <div>
           <div class="amount-container">
-    <button class="amount-button amount-button-decrease" onclick="decreaseAmount()">-</button>
-    <input type="text" id="amount" class="amount-value" value="0" readonly>
-    <button class="amount-button amount-button-increase" onclick="increaseAmount()">+</button>
+    <button class="amount-button amount-button-decrease" >-</button>
+    <input type="text" id="amount" class="amount-value" value="0"  readonly>
+    <button class="amount-button amount-button-increase" >+</button>
   </div>
           <button class="add_to_cart">Add To Cart</button>
         </div>
@@ -865,19 +878,33 @@ function decreaseAmount() {
     });
 }
 const addToCart = function(data) {
-    //get data size and amount
-    // const size = document.querySelector('.size').value
-    // const amount = document.getElementById('amount').value
-    // console.log(size, amount)
-    // console.log(data)
+    // get data size and amount
     document.body.addEventListener('click', (e)=>{
         if (e.target.classList.contains('add_to_cart')) {
+            let size = document.querySelector('.size').value;
+            let amountInput = document.getElementById('amount');
+            if (amountInput.value == 0) {
+                alert('Please select amount');
+                return;
+            }
+            data.size = size;
+            data.amount = +amountInput.value;
             const cart = JSON.parse(localStorage.getItem('cart')) || [];
             cart.push(data);
-            localStorage.setItem('cart', JSON.stringify(data));
+            localStorage.setItem('cart', JSON.stringify(cart));
             alert('Item added to cart');
+            size.value = 'M';
+            amountInput.value = 0;
+            amount = 0;
+            addBadge();
         }
     });
+};
+const addBadge = function() {
+    const cart = JSON.parse(localStorage.getItem('cart'));
+    if (cart.length === 0) return;
+    badge.style.display = 'flex';
+    badge.textContent = cart.length;
 };
 
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}]},["ik2hV","aenu9"], "aenu9", "parcelRequire94c2")
