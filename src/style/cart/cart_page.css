@@ -2,7 +2,34 @@
   width: 100%;
   height: 100vh;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   display: none;
+}
+
+.cart_table {
+  width: 80%;
+  border-collapse: collapse;
+  margin-top: 2rem;
+}
+
+.cart_table th,
+.cart_table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: center;
+}
+
+.cart_table th {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.delete-btn {
+  color: red;
+  border: none;
+  outline: none;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
 }

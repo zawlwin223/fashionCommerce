@@ -2,7 +2,6 @@ const itemsParent = document.querySelector('.items')
 const paginationParent = document.querySelector('.pagnination')
 export const renderItems = function (items) {
   itemsParent.innerHTML = ''
-  console.log(items)
   items.forEach((item) => {
     let card = `
       <div class="item_card">
@@ -32,7 +31,6 @@ export const renderPagination = function (totalPage) {
 }
 
 export const paginationHandler = function (control) {
-  console.log(paginationParent)
   paginationParent.addEventListener('click', function (e) {
     this.querySelectorAll('.page').forEach((page) => {
       page.classList.remove('active')
@@ -43,5 +41,4 @@ export const paginationHandler = function (control) {
     control(pageNumber)
     target.classList.add('active')
   })
-  console.log('Pagination')
 }

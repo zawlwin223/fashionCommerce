@@ -32,6 +32,13 @@
 
 .nav ul li:last-child {
   position: relative;
+
+  img {
+    width: 25px;
+    margin-bottom: 10px;
+    /* height: 30px; */
+    /* border-radius: 50%; */
+  }
 }
 
 .badge {

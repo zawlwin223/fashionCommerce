@@ -46,14 +46,13 @@ switch (path) {
     break
 }
 
-const addBadge = function () {
+export const addBadge = function () {
   const cart = JSON.parse(localStorage.getItem('cart'))
   console.log(cart)
-  if (!cart) {
+  if (!cart || cart.length === 0) {
     badge.style.display = 'none'
     return
   }
   badge.style.display = 'flex'
   badge.textContent = cart.length
 }
-addBadge()

@@ -100,12 +100,46 @@
   }
 }
 
-.about_page, .contact_page, .cart_page {
+.about_page, .contact_page {
   justify-content: center;
   align-items: center;
   width: 100%;
   height: 100vh;
   display: none;
+}
+
+.cart_page {
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100vh;
+  display: none;
+}
+
+.cart_table {
+  border-collapse: collapse;
+  width: 80%;
+  margin-top: 2rem;
+}
+
+.cart_table th, .cart_table td {
+  text-align: center;
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+.cart_table th {
+  background-color: var(--primary-color);
+  color: #fff;
+}
+
+.delete-btn {
+  color: red;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  padding: .5rem 1rem;
 }
 
 .detail_page {
@@ -246,6 +280,11 @@
 
 .nav ul li:last-child {
   position: relative;
+
+  & img {
+    width: 25px;
+    margin-bottom: 10px;
+  }
 }
 
 .badge {

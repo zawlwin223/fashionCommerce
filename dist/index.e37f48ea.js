@@ -600,12 +600,14 @@ var _model = require("./model");
 var _nav = require("./View/nav");
 var _detail = require("./View/detail");
 var _shop = require("./View/shop");
+var _cart = require("./View/cart");
 const renderShopItems = async function() {
     await _model.loadData();
     _shop.renderPagination(_model.state.totalPages);
     _shop.renderItems(_model.paginate(1));
     _detail.getItem(getProductDetailController);
     _detail.renderItem(_model.state.detailItem);
+    _detail.addToCartHandler(_model.state.detailItem);
 };
 const paginationController = async function(pageNumber) {
     _shop.renderItems(_model.paginate(pageNumber));
@@ -613,13 +615,19 @@ const paginationController = async function(pageNumber) {
 const getProductDetailController = function(id) {
     _model.detailProduct(id);
 };
+const deletefromCartController = function() {
+    _nav.addBadge();
+};
 const init = function async() {
     renderShopItems();
+    _nav.addBadge();
     _shop.paginationHandler(paginationController);
+    _cart.loadCartData();
+    _cart.deletefromCartHandler(deletefromCartController);
 };
 init();
 
-},{"./model":"Y4A21","./View/nav":"lKTMY","./View/shop":"en1n5","./View/detail":"jQoZk"}],"Y4A21":[function(require,module,exports,__globalThis) {
+},{"./model":"Y4A21","./View/nav":"lKTMY","./View/shop":"en1n5","./View/detail":"jQoZk","./View/cart":"bM7rQ"}],"Y4A21":[function(require,module,exports,__globalThis) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "state", ()=>state);
@@ -708,6 +716,9 @@ exports.export = function(dest, destName, get) {
 };
 
 },{}],"lKTMY":[function(require,module,exports,__globalThis) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "addBadge", ()=>addBadge);
 const nav = document.querySelector('.nav');
 const nav_links = document.querySelectorAll('.nav_link');
 const badge = document.querySelector('.badge');
@@ -754,16 +765,15 @@ switch(path){
 const addBadge = function() {
     const cart = JSON.parse(localStorage.getItem('cart'));
     console.log(cart);
-    if (!cart) {
+    if (!cart || cart.length === 0) {
         badge.style.display = 'none';
         return;
     }
     badge.style.display = 'flex';
     badge.textContent = cart.length;
 };
-addBadge();
 
-},{}],"en1n5":[function(require,module,exports,__globalThis) {
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"en1n5":[function(require,module,exports,__globalThis) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "renderItems", ()=>renderItems);
@@ -773,7 +783,6 @@ const itemsParent = document.querySelector('.items');
 const paginationParent = document.querySelector('.pagnination');
 const renderItems = function(items) {
     itemsParent.innerHTML = '';
-    console.log(items);
     items.forEach((item)=>{
         let card = `
       <div class="item_card">
@@ -799,7 +808,6 @@ const renderPagination = function(totalPage) {
     buttonParent.firstElementChild.classList.add('active');
 };
 const paginationHandler = function(control) {
-    console.log(paginationParent);
     paginationParent.addEventListener('click', function(e) {
         this.querySelectorAll('.page').forEach((page)=>{
             page.classList.remove('active');
@@ -810,7 +818,6 @@ const paginationHandler = function(control) {
         control(pageNumber);
         target.classList.add('active');
     });
-    console.log('Pagination');
 };
 
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"jQoZk":[function(require,module,exports,__globalThis) {
@@ -818,6 +825,7 @@ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "getItem", ()=>getItem);
 parcelHelpers.export(exports, "renderItem", ()=>renderItem);
+parcelHelpers.export(exports, "addToCartHandler", ()=>addToCartHandler);
 const detail_page = document.querySelector('.detail_page');
 const params = new URLSearchParams(window.location.search);
 const id = params.get('id');
@@ -860,7 +868,6 @@ const renderItem = function(data) {
     //increase and decrease amount work
     increaseAmount();
     decreaseAmount();
-    addToCart(data);
 };
 function increaseAmount() {
     const btn = document.querySelector('.amount-button-increase');
@@ -877,7 +884,7 @@ function decreaseAmount() {
         document.getElementById('amount').value = amount;
     });
 }
-const addToCart = function(data) {
+const addToCartHandler = function(data) {
     // get data size and amount
     document.body.addEventListener('click', (e)=>{
         if (e.target.classList.contains('add_to_cart')) {
@@ -905,6 +912,48 @@ const addBadge = function() {
     if (cart.length === 0) return;
     badge.style.display = 'flex';
     badge.textContent = cart.length;
+};
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"bM7rQ":[function(require,module,exports,__globalThis) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "loadCartData", ()=>loadCartData);
+parcelHelpers.export(exports, "deletefromCartHandler", ()=>deletefromCartHandler);
+const cartPage = document.querySelector('.cart_page');
+const cartTableBody = document.querySelector('.cart_table_body');
+const loadCartData = ()=>{
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    cartTableBody.innerHTML = '';
+    cart.forEach((item)=>{
+        const row = document.createElement('tr');
+        row.innerHTML = `
+      <td><img src="${item.image}" alt="${item.title}" width="50"></td>
+      <td>${item.size}</td>
+      <td>$${item.price}</td>
+      <td>${item.amount}</td>
+      <td>$${item.price * item.amount}</td>
+      <td><button class="delete-btn" data-id="${item.id}">Delete</button></td>
+    `;
+        cartTableBody.appendChild(row);
+    });
+// Add event listeners to delete buttons
+};
+const deletefromCartHandler = function(control) {
+    cartTableBody.addEventListener('click', (e)=>{
+        if (e.target.classList.contains('delete-btn')) {
+            console.log('Hello World');
+            const id = e.target.dataset.id;
+            deleteProduct(id);
+            e.target.parentElement.parentElement.remove();
+            control();
+        }
+    });
+};
+const deleteProduct = (id)=>{
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    let index = cart.findIndex((item)=>item.id == id);
+    cart.splice(index, 1);
+    localStorage.setItem('cart', JSON.stringify(cart));
 };
 
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}]},["ik2hV","aenu9"], "aenu9", "parcelRequire94c2")
