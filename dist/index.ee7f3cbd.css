@@ -100,14 +100,6 @@
   }
 }
 
-.about_page, .contact_page {
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 100vh;
-  display: none;
-}
-
 .cart_page {
   flex-direction: column;
   justify-content: center;
@@ -680,6 +672,46 @@
 
   body {
     font-family: Roboto, Helvetica Neue, sans-serif;
+  }
+
+  @media (width <= 768px) {
+    .nav {
+      padding-inline: 2rem;
+    }
+
+    .hero {
+      text-align: center;
+      flex-direction: column;
+    }
+
+    .hero > :first-child {
+      padding-top: 2rem;
+    }
+
+    .hero > :nth-child(2) {
+      justify-content: center;
+
+      & img {
+        max-width: 80%;
+      }
+    }
+
+    .service, .promotion, .contact, .signUp {
+      padding-inline: 2rem;
+    }
+
+    .service .card, .promotion .card {
+      padding-inline: 1rem;
+    }
+
+    .promotion .first_row, .promotion .second_row {
+      grid-template-columns: 1fr;
+    }
+
+    .promotion .first_row > :nth-child(2), .promotion .second_row > * {
+      background-position: center;
+      background-size: cover;
+    }
   }
 }
 /*# sourceMappingURL=index.ee7f3cbd.css.map */

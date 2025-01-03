@@ -842,7 +842,8 @@ const renderItem = function(data) {
           alt="" />
       </div>
       <article class="detail_info">
-        <span>${data.category}</span>
+     
+        <span> <a href="shop">Shop</a> / ${data.category}</span>
         <h2>${data.title}</h2>
         <p class="price">$${data.price}</p>
         <select value="Select Size" name="" class="size">
