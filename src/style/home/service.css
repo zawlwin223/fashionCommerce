@@ -18,3 +18,12 @@
     }
   }
 }
+
+@media screen and (max-width: 768px) {
+  .service {
+    flex-direction: column;
+    .card {
+      margin-bottom: 1rem;
+    }
+  }
+}

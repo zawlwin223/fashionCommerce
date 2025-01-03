@@ -2,7 +2,7 @@
   background-color: black;
   /* background-image: url('../img/feb9281fae1bb51e58239b2d02160f80.jpg'); */
   width: 100%;
-  height: 100%;
+  /* height: 100%; */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -36,5 +36,10 @@
       padding-inline: 1.5rem;
       padding-block: 1rem;
     }
+  }
+}
+@media screen and (max-width: 768px) {
+  p {
+    font-size: 1rem !important;
   }
 }
