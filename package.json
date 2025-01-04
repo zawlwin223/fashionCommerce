@@ -5,7 +5,9 @@
   "name": "fashionecommerce",
   "version": "1.0.0",
   "default": "index.html",
-  "devDependencies": {},
+  "devDependencies": {
+    "svgo": "^3.3.2"
+  },
   "scripts": {
     "start": "parcel index.html",
     "build": "parcel build index.html --dist-dir ./dist"

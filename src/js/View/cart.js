@@ -21,6 +21,7 @@ export const loadCartData = () => {
 }
 
 export const deletefromCartHandler = function (control) {
+  console.log('Hola')
   cartTableBody.addEventListener('click', (e) => {
     if (e.target.classList.contains('delete-btn')) {
       console.log('Hello World')
