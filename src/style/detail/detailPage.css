@@ -7,7 +7,8 @@
   align-items: center;
 
   .image_part {
-    padding-top: 5rem;
+    padding-top: calc(95px + 1rem);
+    padding-bottom: 2rem;
     flex: 1;
     height: 100%;
     display: flex;
@@ -19,7 +20,8 @@
     }
   }
   .detail_info {
-    padding-top: 5rem;
+    padding-top: calc(95px + 1rem);
+    padding-bottom: 2rem;
     padding-inline: 5rem;
     flex: 1;
     display: flex;

@@ -37,9 +37,17 @@
       padding-block: 1rem;
     }
   }
-}
-@media screen and (max-width: 768px) {
-  p {
-    font-size: 1rem !important;
+
+  @media screen and (max-width: 1300px) {
+    p {
+      font-size: 2rem !important;
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+    p {
+      font-size: 1rem !important;
+      text-align: center;
+    }
   }
 }

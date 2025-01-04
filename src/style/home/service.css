@@ -1,6 +1,7 @@
 .service {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
+  gap: 2rem;
   padding-block: 2rem;
   .card {
     padding-inline: 3rem;
@@ -16,6 +17,13 @@
     div {
       margin-top: 1rem;
     }
+  }
+}
+
+@media screen and (max-width: 1300px) {
+  .service {
+    flex-wrap: wrap;
+    padding-inline: 3rem;
   }
 }
 

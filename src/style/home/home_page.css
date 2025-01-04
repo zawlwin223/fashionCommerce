@@ -6,6 +6,15 @@
     padding-inline: 7rem;
   }
 }
+
+@media screen and (max-width: 1300px) {
+  .home_page {
+    & > * {
+      padding-inline: 3rem;
+    }
+  }
+}
+
 @media screen and (max-width: 768px) {
   .home_page {
     & > * {
