@@ -14,6 +14,16 @@ const cart_page = document.querySelector('.cart_page')
 const detail_page = document.querySelector('.detail_page')
 
 const path = window.location.pathname
+
+export const test = function () {
+  nav_links.forEach((link) => {
+    link.addEventListener('click', (e) => {
+      // e.preventDefault()
+    })
+    console.log(link)
+  })
+}
+console.log(nav_links)
 switch (path) {
   case '/':
     // nav_links[0].classList.add('active')

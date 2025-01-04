@@ -9,8 +9,8 @@
     <link
       href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
       rel="stylesheet" />
-    <link rel="stylesheet" href="./src/style/style.css" />
-    <script type="module" src="./src/js/controller.js"></script>
+    <link rel="stylesheet" href="src/style/style.css" />
+    <script defer type="module" src="src/js/controller.js"></script>
   </head>
   <body>
     <!-- navigation -->
@@ -22,11 +22,13 @@
         <div></div>
       </div>
       <ul id="nav-menu">
-        <li><a href="home">Home</a></li>
-        <li><a href="shop">Shop</a></li>
+        <li><a class="nav_link" href="home">Home</a></li>
+        <li><a class="nav_link" href="shop">Shop</a></li>
         <li>
           <span class="badge">0</span>
-          <a href="cart"> <img src="./src/img/shopping-bag.png" alt="" /> </a>
+          <a class="nav_link" href="cart">
+            <img src="./src/img/shopping-bag.png" alt="" />
+          </a>
         </li>
       </ul>
     </nav>

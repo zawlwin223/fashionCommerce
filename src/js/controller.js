@@ -1,8 +1,13 @@
-import * as model from './model'
-import * as nav from './View/nav'
-import * as detail from './View/detail'
-import * as shop from './View/shop'
-import * as cart from './View/cart'
+import * as model from './model.js'
+import * as nav from './View/nav.js'
+import * as detail from './View/detail.js'
+import * as shop from './View/shop.js'
+import * as cart from './View/cart.js'
+console.log('Hello World it works')
+
+// import 'core-js/stable'
+// import 'regenerator-runtime/runtime'
+// import { async } from 'regenerator-runtime'
 
 const renderShopItems = async function () {
   await model.loadData()
@@ -28,6 +33,7 @@ const deletefromCartController = function () {
 const init = function async() {
   renderShopItems()
   nav.addBadge()
+  nav.test()
   shop.paginationHandler(paginationController)
   cart.loadCartData()
   cart.deletefromCartHandler(deletefromCartController)
