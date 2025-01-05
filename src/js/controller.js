@@ -10,7 +10,9 @@ console.log('Hello World it works')
 // import { async } from 'regenerator-runtime'
 
 const renderShopItems = async function () {
+  shop.loadingSpinner(model.state.isLoading)
   await model.loadData()
+
   shop.renderPagination(model.state.totalPages)
   shop.renderItems(model.paginate(1))
   detail.getItem(getProductDetailController)

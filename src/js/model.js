@@ -1,39 +1,47 @@
 export const state = {
   items: [],
+  isLoading: true,
 }
 // const itemsPerPage = 8
 
 export const loadData = async function () {
-  const urls = [
-    "https://fakestoreapi.com/products/category/men's clothing",
-    "https://fakestoreapi.com/products/category/women's clothing",
-    'https://fakestoreapi.com/products/category/jewelery',
-  ]
+  state.isLoading = true
 
-  const responses = await Promise.all(urls.map((url) => fetch(url)))
-  console.log(responses)
-  // console.log(response)
-  const data = await Promise.all(
-    responses.map(async (response) => {
-      return await response.json()
-    })
-  )
-  const combinedData = data.flat()
-  combinedData.forEach((item) => {
-    state.items.push({
-      id: item.id,
-      category: item.category,
-      description: item.description,
-      price: item.price,
-      image: item.image,
-      title: item.title,
-      rating: item.rating,
-    })
-  })
+  try {
+    const urls = [
+      "https://fakestoreapi.com/products/category/men's clothing",
+      "https://fakestoreapi.com/products/category/women's clothing",
+      'https://fakestoreapi.com/products/category/jewelery',
+    ]
 
-  state.totalItems = state.items.length
-  state.itemsPerPage = 8
-  state.totalPages = Math.ceil(state.totalItems / state.itemsPerPage)
+    const responses = await Promise.all(urls.map((url) => fetch(url)))
+    const data = await Promise.all(
+      responses.map(async (response) => {
+        return await response.json()
+      })
+    )
+    const combinedData = data.flat()
+    combinedData.forEach((item) => {
+      state.items.push({
+        id: item.id,
+        category: item.category,
+        description: item.description,
+        price: item.price,
+        image: item.image,
+        title: item.title,
+        rating: item.rating,
+      })
+    })
+
+    state.totalItems = state.items.length
+    state.itemsPerPage = 8
+    state.totalPages = Math.ceil(state.totalItems / state.itemsPerPage)
+  } catch (error) {
+    console.error('Error loading data:', error)
+    throw error
+  } finally {
+    // state.isLoading = false
+  }
 }
 
 export const paginate = function (currentPage) {

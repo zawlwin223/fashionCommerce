@@ -1,6 +1,11 @@
 const itemsParent = document.querySelector('.items')
 const paginationParent = document.querySelector('.pagnination')
+
 export const renderItems = function (items) {
+  itemsParent.style.display = 'grid'
+  itemsParent.style.height = ''
+  itemsParent.style.justifyContent = ''
+  itemsParent.style.alignItems = ''
   itemsParent.innerHTML = ''
   items.forEach((item) => {
     let card = `
@@ -41,4 +46,20 @@ export const paginationHandler = function (control) {
     control(pageNumber)
     target.classList.add('active')
   })
+}
+
+export const loadingSpinner = function (isLoading = false) {
+  console.log(isLoading)
+  if (isLoading) {
+    itemsParent.innerHTML = `
+      <div class="lds-spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+    `
+    itemsParent.style.display = 'flex'
+    itemsParent.style.justifyContent = 'center'
+    itemsParent.style.alignItems = 'center'
+    itemsParent.style.height = '100vh'
+    return
+  }
+  // itemsParent.style.display = 'grid'
+  // itemsParent.style.height = '0'
 }
