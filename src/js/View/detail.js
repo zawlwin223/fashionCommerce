@@ -16,7 +16,7 @@ export const renderItem = function (data) {
       </div>
       <article class="detail_info">
      
-        <span> <a href="shop">Shop</a> / ${data.category}</span>
+        <span> <a href="?page=shop">Shop</a> / ${data.category}</span>
         <h2>${data.title}</h2>
         <p class="price">$${data.price}</p>
         <select value="Select Size" name="" class="size">

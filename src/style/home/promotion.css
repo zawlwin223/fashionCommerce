@@ -14,6 +14,8 @@
     & > :first-child {
       background: url('../../img/bb66b7cad56595df64c755aaed46932e.jpg');
       height: 300px;
+      background-repeat: no-repeat;
+      background-size: cover;
       h3 {
         font-size: 2rem;
       }
@@ -62,6 +64,8 @@
       background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
         url('../../img/cf1139688a03153f787fce5dd7f07774.jpg');
       height: 300px;
+      background-repeat: no-repeat;
+      background-size: cover;
       h3 {
         font-size: 2rem;
         color: white;
@@ -76,6 +80,8 @@
       height: 300px;
       background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
         url('../../img/b6b02e85ef483bbe0c9f4e15f90444fb.jpg');
+      background-repeat: no-repeat;
+      background-size: cover;
       h3 {
         font-size: 2rem;
         color: white;
