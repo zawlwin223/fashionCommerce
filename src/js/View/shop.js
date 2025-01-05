@@ -12,7 +12,7 @@ export const renderItems = function (items) {
         <div class="detail">
           <h3>${item.title}</h3>
           <p>$${item.price}</p>
-          <a href="detail?id=${item.id}">Detail</a>
+          <a href="index.html?page=detail&id=${item.id}">Detail</a>
         </div>
       </div>
     `

@@ -91,19 +91,19 @@
     }
   }
 }
-@media screen and (max-width: 768px) {
-  .shop_page {
-    .items {
-      grid-template-columns: repeat(2, 1fr);
-      padding-inline: 1.5rem;
-    }
-  }
-}
 @media screen and (max-width: 1024px) {
   .shop_page {
     .items {
       grid-template-columns: repeat(3, 1fr);
       /* padding-inline: 1.5rem; */
+    }
+  }
+}
+@media screen and (max-width: 768px) {
+  .shop_page {
+    .items {
+      grid-template-columns: repeat(2, 1fr);
+      padding-inline: 1.5rem;
     }
   }
 }

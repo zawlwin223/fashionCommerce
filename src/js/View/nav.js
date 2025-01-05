@@ -13,47 +13,41 @@ const contact_page = document.querySelector('.contact_page')
 const cart_page = document.querySelector('.cart_page')
 const detail_page = document.querySelector('.detail_page')
 
-const path = window.location.pathname
+// Get the query parameter from URL
+const urlParams = new URLSearchParams(window.location.search)
+const path = urlParams.get('page') || 'home'
 
-export const test = function () {
-  nav_links.forEach((link) => {
-    link.addEventListener('click', (e) => {
-      // e.preventDefault()
-    })
-    console.log(link)
-  })
-}
 console.log(nav_links)
 switch (path) {
-  case '/':
-    // nav_links[0].classList.add('active')
-    break
-  case '/home':
+  case 'home':
     home_page.style.display = 'flex'
-
     shop_page.style.display = 'none'
+    cart_page.style.display = 'none'
+    detail_page.style.display = 'none'
     break
-  case '/shop':
-    // nav_links[0].classList.add('active')
+  case 'shop':
     home_page.style.display = 'none'
     shop_page.style.display = 'block'
+    cart_page.style.display = 'none'
+    detail_page.style.display = 'none'
     break
-  case '/about':
+  case 'cart':
     home_page.style.display = 'none'
-    about_page.style.display = 'flex'
-    break
-  case '/contact':
-    home_page.style.display = 'none'
-    contact_page.style.display = 'flex'
-    break
-  case '/cart':
-    home_page.style.display = 'none'
+    shop_page.style.display = 'none'
     cart_page.style.display = 'flex'
+    detail_page.style.display = 'none'
     break
-  case '/detail':
+  case 'detail':
     home_page.style.display = 'none'
+    shop_page.style.display = 'none'
+    cart_page.style.display = 'none'
     detail_page.style.display = 'flex'
     break
+  default:
+    home_page.style.display = 'flex'
+    shop_page.style.display = 'none'
+    cart_page.style.display = 'none'
+    detail_page.style.display = 'none'
 }
 
 export const addBadge = function () {

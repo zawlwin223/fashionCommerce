@@ -15,7 +15,7 @@ const renderShopItems = async function () {
   shop.renderItems(model.paginate(1))
   detail.getItem(getProductDetailController)
   detail.renderItem(model.state.detailItem)
-  detail.addToCartHandler(model.state.detailItem)
+  detail.addToCartHandler(model.state.detailItem, addToCartController)
 }
 
 const paginationController = async function (pageNumber) {
@@ -30,10 +30,14 @@ const deletefromCartController = function () {
   nav.addBadge()
 }
 
+const addToCartController = function () {
+  nav.addBadge()
+}
+
 const init = function async() {
   renderShopItems()
   nav.addBadge()
-  nav.test()
+  // nav.test()
   shop.paginationHandler(paginationController)
   cart.loadCartData()
   cart.deletefromCartHandler(deletefromCartController)

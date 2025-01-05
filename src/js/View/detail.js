@@ -64,9 +64,7 @@ function decreaseAmount() {
   })
 }
 
-export const addToCartHandler = function (data) {
-  // get data size and amount
-
+export const addToCartHandler = function (data, handler) {
   document.body.addEventListener('click', (e) => {
     if (e.target.classList.contains('add_to_cart')) {
       let size = document.querySelector('.size').value
@@ -81,17 +79,11 @@ export const addToCartHandler = function (data) {
       cart.push(data)
       localStorage.setItem('cart', JSON.stringify(cart))
       alert('Item added to cart')
-      size.value = 'M'
+      handler()
+      // size.value = 'M'
       amountInput.value = 0
       amount = 0
-      addBadge()
+      console.log(handler)
     }
   })
-}
-
-const addBadge = function () {
-  const cart = JSON.parse(localStorage.getItem('cart'))
-  if (cart.length === 0) return
-  badge.style.display = 'flex'
-  badge.textContent = cart.length
 }
