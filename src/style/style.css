@@ -46,7 +46,7 @@
       height: 40px;
     }
     .lds-spinner div {
-      transform-origin: 40px 40px;
+      transform-origin: 20px 20px;
       animation: lds-spinner 1.2s linear infinite;
     }
     .lds-spinner div:after {
@@ -55,8 +55,8 @@
       position: absolute;
       top: 3.2px;
       left: 36.8px;
-      width: 6.4px;
-      height: 17.6px;
+      width: 19.4px;
+      height: 5.6px;
       border-radius: 20%;
       background: var(--primary-color);
     }

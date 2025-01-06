@@ -90,9 +90,20 @@ const addToCart = function (data, control) {
   })
 }
 
-// const addBadge = function () {
-//   const cart = JSON.parse(localStorage.getItem('cart'))
-//   if (cart.length === 0) return
-//   badge.style.display = 'flex'
-//   badge.textContent = cart.length
-// }
+export const loadingSpinner = function () {
+  detail_page.innerHTML = `
+      <div class="lds-spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+    `
+  detail_page.style.display = 'flex'
+  // detail_page.style.justifyContent = 'center'
+  // detail_page.style.alignItems = 'center'
+  detail_page.style.height = '100vh'
+}
+export const removeLoadingSpinner = function () {
+  detail_page.style.display = 'flex'
+  detail_page.style.height = ''
+  // itemsParent.style.height = ''
+  // itemsParent.style.justifyContent = ''
+  // itemsParent.style.alignItems = ''
+  detail_page.innerHTML = ''
+}
