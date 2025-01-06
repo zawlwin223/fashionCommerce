@@ -42,7 +42,7 @@ export const renderItem = function (data) {
   //increase and decrease amount work
   increaseAmount()
   decreaseAmount()
-  addToCart(data)
+  // addToCartHandler(data)
 }
 
 function increaseAmount() {
@@ -64,7 +64,7 @@ function decreaseAmount() {
   })
 }
 
-const addToCart = function (data, control) {
+export const addToCartHandler = function (data, control) {
   // get data size and amount
 
   document.body.addEventListener('click', (e) => {
