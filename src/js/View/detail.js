@@ -1,7 +1,7 @@
 const detail_page = document.querySelector('.detail_page')
 const params = new URLSearchParams(window.location.search)
 const id = params.get('id')
-const badge = document.querySelector('.badge')
+// const badge = document.querySelector('.badge')
 let amount = 0
 export const getItem = function (control) {
   if (!id) return
@@ -86,4 +86,22 @@ export const addToCartHandler = function (data, handler) {
       console.log(handler)
     }
   })
+}
+
+export const loadingSpinner = function () {
+  detail_page.innerHTML = `
+      <div class="lds-spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+    `
+  detail_page.style.display = 'flex'
+  // detail_page.style.justifyContent = 'center'
+  // detail_page.style.alignItems = 'center'
+  detail_page.style.height = '100vh'
+}
+export const removeLoadingSpinner = function () {
+  detail_page.style.display = 'flex'
+  detail_page.style.height = ''
+  // itemsParent.style.height = ''
+  // itemsParent.style.justifyContent = ''
+  // itemsParent.style.alignItems = ''
+  detail_page.innerHTML = ''
 }
