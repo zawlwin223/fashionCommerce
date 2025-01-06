@@ -29,9 +29,7 @@ const paginationController = async function (pageNumber) {
   shop.renderItems(model.paginate(pageNumber))
 }
 
-const getProductDetailController = function (id) {
-  model.detailProduct(id)
-}
+
 
 const deletefromCartController = function () {
   nav.addBadge()

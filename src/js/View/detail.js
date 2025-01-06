@@ -1,8 +1,12 @@
 const detail_page = document.querySelector('.detail_page')
 const params = new URLSearchParams(window.location.search)
 const id = params.get('id')
-const badge = document.querySelector('.badge')
+// const badge = document.querySelector('.badge')
 let amount = 0
+export const getItem = function (control) {
+  if (!id) return
+  control(id)
+}
 
 export const renderItem = function (data) {
   const html = `<div class="image_part">
@@ -11,8 +15,7 @@ export const renderItem = function (data) {
           alt="" />
       </div>
       <article class="detail_info">
-     
-        <span> <a href="?page=shop">Shop</a> / ${data.category}</span>
+        <span>${data.category}</span>
         <h2>${data.title}</h2>
         <p class="price">$${data.price}</p>
         <select value="Select Size" name="" class="size">
@@ -39,6 +42,7 @@ export const renderItem = function (data) {
   //increase and decrease amount work
   increaseAmount()
   decreaseAmount()
+  addToCart(data)
 }
 
 function increaseAmount() {
@@ -60,7 +64,9 @@ function decreaseAmount() {
   })
 }
 
-export const addToCartHandler = function (data, handler) {
+const addToCart = function (data, control) {
+  // get data size and amount
+
   document.body.addEventListener('click', (e) => {
     if (e.target.classList.contains('add_to_cart')) {
       let size = document.querySelector('.size').value
@@ -75,11 +81,18 @@ export const addToCartHandler = function (data, handler) {
       cart.push(data)
       localStorage.setItem('cart', JSON.stringify(cart))
       alert('Item added to cart')
-      handler()
-      // size.value = 'M'
+      control()
+      size.value = 'M'
       amountInput.value = 0
       amount = 0
-      console.log(handler)
+      // addBadge()
     }
   })
 }
+
+// const addBadge = function () {
+//   const cart = JSON.parse(localStorage.getItem('cart'))
+//   if (cart.length === 0) return
+//   badge.style.display = 'flex'
+//   badge.textContent = cart.length
+// }
