@@ -7,7 +7,7 @@ export const renderItems = function (items) {
       <div class="item_card">
         <img
           src="${item.image}"
-          alt=""
+          alt="" loading="lazy"
         />
         <div class="detail">
           <h3>${item.title}</h3>

@@ -7,7 +7,9 @@ export const loadCartData = () => {
   cart.forEach((item) => {
     const row = document.createElement('tr')
     row.innerHTML = `
-      <td><img src="${item.image}" alt="${item.title}" width="50"></td>
+      <td><img src="${item.image}" alt="${
+      item.title
+    }" width="50" loading="lazy"></td>
       <td>${item.size}</td>
       <td>$${item.price}</td>
       <td>${item.amount}</td>

@@ -12,10 +12,10 @@ export const renderItem = function (data) {
   const html = `<div class="image_part">
         <img
           src="${data.image}"
-          alt="" />
+          alt="" loading="lazy"/>
       </div>
       <article class="detail_info">
-        <span>${data.category}</span>
+        <span><a class="nav_link" href="?page=shop">Shop</a>/ ${data.category}</span>
         <h2>${data.title}</h2>
         <p class="price">$${data.price}</p>
         <select value="Select Size" name="" class="size">
