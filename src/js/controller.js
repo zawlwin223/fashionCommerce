@@ -3,31 +3,34 @@ import * as nav from './View/nav.js'
 import * as detail from './View/detail.js'
 import * as shop from './View/shop.js'
 import * as cart from './View/cart.js'
-console.log('Hello World it works')
-
-// import 'core-js/stable'
-// import 'regenerator-runtime/runtime'
-// import { async } from 'regenerator-runtime'
 
 const render = async function () {
   model.state.id ? await renderDetailItem() : await renderShopItems()
 }
 
 const renderShopItems = async function () {
-  shop.loadingSpinner()
-  await model.loadData()
-  shop.removeLoadingSpinner()
-  shop.renderPagination(model.state.totalPages)
-  shop.renderItems(model.paginate(1))
+  try {
+    shop.loadingSpinner()
+    await model.loadData()
+    shop.removeLoadingSpinner()
+    shop.renderPagination(model.state.totalPages)
+    shop.renderItems(model.paginate(1))
+  } catch (error) {
+    alert(error)
+  }
 }
 
 const renderDetailItem = async function () {
-  detail.loadingSpinner()
-  await model.loadData()
-  detail.removeLoadingSpinner()
-  model.detailProduct(model.state.id)
-  detail.renderItem(model.state.detailItem)
-  detail.addToCartHandler(model.state.detailItem, addToCartController)
+  try {
+    detail.loadingSpinner()
+    await model.loadData()
+    detail.removeLoadingSpinner()
+    model.detailProduct(model.state.id)
+    detail.renderItem(model.state.detailItem)
+    detail.addToCartHandler(model.state.detailItem, addToCartController)
+  } catch (error) {
+    alert(error)
+  }
 }
 
 const paginationController = async function (pageNumber) {
@@ -50,9 +53,7 @@ const init = function async() {
   detail.getItem(getProductDetailController)
   render()
   nav.addBadge()
-  // nav.test()
   shop.paginationHandler(paginationController)
-  // renderDetailItem()
   cart.loadCartData()
   cart.deletefromCartHandler(deletefromCartController)
 }

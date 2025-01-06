@@ -1,15 +1,8 @@
-const nav = document.querySelector('.nav')
 const nav_links = document.querySelectorAll('.nav_link')
 const badge = document.querySelector('.badge')
-// const hero = document.querySelector('.hero')
-// const promotion = document.querySelector('.promotion')
-// const repairService = document.querySelector('.repair_service')
-// const service = document.querySelector('.service')
 
 const home_page = document.querySelector('.home_page')
 const shop_page = document.querySelector('.shop_page')
-const about_page = document.querySelector('.about_page')
-const contact_page = document.querySelector('.contact_page')
 const cart_page = document.querySelector('.cart_page')
 const detail_page = document.querySelector('.detail_page')
 
@@ -17,7 +10,6 @@ const detail_page = document.querySelector('.detail_page')
 const urlParams = new URLSearchParams(window.location.search)
 const path = urlParams.get('page') || 'home'
 
-console.log(nav_links)
 switch (path) {
   case 'home':
     home_page.style.display = 'flex'
@@ -52,7 +44,6 @@ switch (path) {
 
 export const addBadge = function () {
   const cart = JSON.parse(localStorage.getItem('cart'))
-  console.log(cart)
   if (!cart || cart.length === 0) {
     badge.style.display = 'none'
     return
@@ -60,3 +51,18 @@ export const addBadge = function () {
   badge.style.display = 'flex'
   badge.textContent = cart.length
 }
+
+const navLinks = document.querySelectorAll('.nav_link')
+
+const setActiveLink = () => {
+  navLinks.forEach((link) => {
+    const linkPage = new URLSearchParams(link.getAttribute('href')).get('page')
+    if (linkPage === path) {
+      link.classList.add('active')
+    } else {
+      link.classList.remove('active')
+    }
+  })
+}
+
+setActiveLink()

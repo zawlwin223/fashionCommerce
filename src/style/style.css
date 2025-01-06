@@ -28,6 +28,7 @@
     --star-color: #ffd700;
     --background-color: #f0f8f7;
     --background-secondary-color: #140337;
+    --primary-color-dark: #088178dd;
   }
   body {
     font-family: 'Roboto', 'Helvetica Neue', sans-serif;
@@ -117,4 +118,49 @@
       opacity: 0;
     }
   }
+}
+
+/* Add these button base styles to your global CSS */
+button,
+a.button,
+.add_to_cart,
+.delete-btn {
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+/* Primary buttons */
+.add_to_cart:hover,
+.hero a:hover,
+.promotion button:hover,
+.signUp form button:hover {
+  background-color: var(--primary-color-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Delete button */
+.delete-btn:hover {
+  background-color: rgba(255, 0, 0, 0.1);
+  color: darkred;
+  transform: translateY(-2px);
+}
+
+/* Pagination buttons */
+.page:hover {
+  color: var(--primary-color);
+  transform: translateY(-2px);
+}
+
+/* Shop detail button */
+.item_card .detail a:hover {
+  background-color: var(--primary-color-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Amount buttons */
+.amount-button:hover {
+  color: var(--primary-color);
+  transform: translateY(-2px);
 }

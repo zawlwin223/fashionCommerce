@@ -35,6 +35,15 @@
       align-items: center;
       padding-inline: 1.5rem;
       padding-block: 1rem;
+      transition: all 0.3s ease;
+      color: var(--text-color);
+    }
+
+    button:hover {
+      background-color: var(--primary-color);
+      color: white;
+      transform: translateY(-2px);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
     }
   }
 

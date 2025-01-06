@@ -28,9 +28,20 @@
 .nav ul li {
   margin: 0 1rem;
   color: var(--text-color);
+
   a {
     text-decoration: none;
     color: var(--text-color);
+    transition: color 0.3s ease;
+  }
+
+  a:hover {
+    color: var(--primary-color);
+  }
+
+  a.active {
+    color: var(--primary-color);
+    font-weight: 600;
   }
 }
 
@@ -39,16 +50,29 @@
 
   img {
     width: 25px;
-    /* margin-bottom: 10px; */
-    /* height: 30px; */
-    /* border-radius: 50%; */
+    transition: filter 0.3s ease;
+  }
+
+  a {
+    text-decoration: none;
+    color: var(--text-color);
+    transition: color 0.3s ease;
+  }
+
+  a:hover img {
+    filter: brightness(0) saturate(100%) invert(31%) sepia(98%) saturate(1111%)
+      hue-rotate(183deg) brightness(91%) contrast(101%);
+  }
+
+  a.active img {
+    filter: brightness(0) saturate(100%) invert(31%) sepia(98%) saturate(1111%)
+      hue-rotate(183deg) brightness(91%) contrast(101%);
   }
 }
 
 .badge {
   display: none;
   position: absolute;
-  /* display: flex; */
   justify-content: center;
   align-items: center;
   background-color: red;
@@ -58,6 +82,7 @@
   top: -18px;
   right: -15px;
 }
+
 .menu-toggle {
   display: none;
   flex-direction: column;
@@ -70,6 +95,7 @@
   background-color: white;
   margin: 4px 0;
 }
+
 @media screen and (max-width: 768px) {
   .nav {
     padding-inline: 1rem;
@@ -77,6 +103,7 @@
     align-items: center;
   }
 }
+
 @media screen and (max-width: 1300px) {
   .nav {
     padding-inline: 3rem;

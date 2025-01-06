@@ -1,4 +1,3 @@
-const cartPage = document.querySelector('.cart_page')
 const cartTableBody = document.querySelector('.cart_table_body')
 
 export const loadCartData = () => {
@@ -23,7 +22,6 @@ export const loadCartData = () => {
 }
 
 export const deletefromCartHandler = function (control) {
-  console.log('Hola')
   cartTableBody.addEventListener('click', (e) => {
     if (e.target.classList.contains('delete-btn')) {
       console.log('Hello World')

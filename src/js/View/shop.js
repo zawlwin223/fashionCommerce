@@ -2,6 +2,7 @@ const itemsParent = document.querySelector('.items')
 const paginationParent = document.querySelector('.pagnination')
 
 export const renderItems = function (items) {
+  itemsParent.innerHTML = ''
   items.forEach((item) => {
     let card = `
       <div class="item_card">

@@ -2,7 +2,6 @@ export const state = {
   items: [],
   isLoading: true,
 }
-// const itemsPerPage = 8
 
 export const loadData = async function () {
   state.isLoading = true
@@ -15,6 +14,7 @@ export const loadData = async function () {
     ]
 
     const responses = await Promise.all(urls.map((url) => fetch(url)))
+    if (!responses.ok) new Error('Error fetching data')
     const data = await Promise.all(
       responses.map(async (response) => {
         return await response.json()
@@ -37,18 +37,12 @@ export const loadData = async function () {
     state.itemsPerPage = 8
     state.totalPages = Math.ceil(state.totalItems / state.itemsPerPage)
   } catch (error) {
-    console.error('Error loading data:', error)
     throw error
-  } finally {
-    // state.isLoading = false
   }
 }
 
 export const paginate = function (currentPage) {
-  // const totalItems = state.items.length
-  // const totalPages = Math.ceil(totalItems / itemsPerPage)
   if (currentPage < 1 || currentPage > state.totalPages) {
-    console.log('Error')
     return { error: 'Invalid page number' }
   }
 
@@ -66,5 +60,4 @@ export const getId = function (id) {
 export const detailProduct = function (id) {
   const detailItem = state.items.find((item) => item.id == id)
   state.detailItem = detailItem
-  console.log(detailItem)
 }

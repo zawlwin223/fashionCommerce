@@ -59,6 +59,7 @@
         border: none;
         background-color: transparent;
         outline: none;
+        transition: all 0.3s ease;
       }
       .amount-value {
         text-align: center;
@@ -75,7 +76,7 @@
         padding: 1rem 1.5rem;
         cursor: pointer;
         border-radius: 4px;
-        transition: background-color 0.3s ease;
+        transition: all 0.3s ease;
         margin-left: 1.5rem;
       }
     }

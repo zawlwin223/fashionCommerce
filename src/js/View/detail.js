@@ -42,7 +42,6 @@ export const renderItem = function (data) {
   //increase and decrease amount work
   increaseAmount()
   decreaseAmount()
-  // addToCartHandler(data)
 }
 
 function increaseAmount() {
@@ -82,10 +81,8 @@ export const addToCartHandler = function (data, control) {
       localStorage.setItem('cart', JSON.stringify(cart))
       alert('Item added to cart')
       control()
-      size.value = 'M'
       amountInput.value = 0
       amount = 0
-      // addBadge()
     }
   })
 }
