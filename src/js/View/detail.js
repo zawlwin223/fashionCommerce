@@ -3,10 +3,6 @@ const params = new URLSearchParams(window.location.search)
 const id = params.get('id')
 const badge = document.querySelector('.badge')
 let amount = 0
-export const getItem = function (control) {
-  if (!id) return
-  control(id)
-}
 
 export const renderItem = function (data) {
   const html = `<div class="image_part">

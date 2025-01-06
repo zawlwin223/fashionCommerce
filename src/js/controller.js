@@ -10,12 +10,17 @@ console.log('Hello World it works')
 // import { async } from 'regenerator-runtime'
 
 const renderShopItems = async function () {
-  shop.loadingSpinner(model.state.isLoading)
+  shop.loadingSpinner()
   await model.loadData()
-
+  shop.removeLoadingSpinner()
   shop.renderPagination(model.state.totalPages)
   shop.renderItems(model.paginate(1))
-  detail.getItem(getProductDetailController)
+  // detail.getItem(getProductDetailController)
+  detail.renderItem(model.state.detailItem)
+  detail.addToCartHandler(model.state.detailItem, addToCartController)
+}
+
+const renderDetailItem = async function () {
   detail.renderItem(model.state.detailItem)
   detail.addToCartHandler(model.state.detailItem, addToCartController)
 }
@@ -38,6 +43,7 @@ const addToCartController = function () {
 
 const init = function async() {
   renderShopItems()
+  renderDetailItem()
   nav.addBadge()
   // nav.test()
   shop.paginationHandler(paginationController)
