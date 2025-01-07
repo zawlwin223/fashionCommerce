@@ -19,9 +19,10 @@
     .lazy_loaded_img {
       width: 50% !important;
       height: auto;
+      margin-inline: auto;
     }
     .detail_img {
-      display: none;
+      /* display: none; */
       width: 50%;
       height: auto;
     }

@@ -6,39 +6,35 @@ export const state = {
 export const loadData = async function () {
   state.isLoading = true
 
-  try {
-    const urls = [
-      "https://fakestoreapi.com/products/category/men's clothing",
-      "https://fakestoreapi.com/products/category/women's clothing",
-      'https://fakestoreapi.com/products/category/jewelery',
-    ]
+  const urls = [
+    "https://fakestoreapi.com/products/category/men's clothing",
+    "https://fakestoreapi.com/products/category/women's clothing",
+    'https://fakestoreapi.com/products/category/jewelery',
+  ]
 
-    const responses = await Promise.all(urls.map((url) => fetch(url)))
-    if (!responses.ok) new Error('Error fetching data')
-    const data = await Promise.all(
-      responses.map(async (response) => {
-        return await response.json()
-      })
-    )
-    const combinedData = data.flat()
-    combinedData.forEach((item) => {
-      state.items.push({
-        id: item.id,
-        category: item.category,
-        description: item.description,
-        price: item.price,
-        image: item.image,
-        title: item.title,
-        rating: item.rating,
-      })
+  const responses = await Promise.all(urls.map((url) => fetch(url)))
+  if (!responses.ok) new Error('Error fetching data')
+  const data = await Promise.all(
+    responses.map(async (response) => {
+      return await response.json()
     })
+  )
+  const combinedData = data.flat()
+  combinedData.forEach((item) => {
+    state.items.push({
+      id: item.id,
+      category: item.category,
+      description: item.description,
+      price: item.price,
+      image: item.image,
+      title: item.title,
+      rating: item.rating,
+    })
+  })
 
-    state.totalItems = state.items.length
-    state.itemsPerPage = 8
-    state.totalPages = Math.ceil(state.totalItems / state.itemsPerPage)
-  } catch (error) {
-    throw error
-  }
+  state.totalItems = state.items.length
+  state.itemsPerPage = 8
+  state.totalPages = Math.ceil(state.totalItems / state.itemsPerPage)
 }
 
 export const paginate = function (currentPage) {

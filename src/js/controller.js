@@ -9,30 +9,22 @@ const render = async function () {
 }
 
 const renderShopItems = async function () {
-  try {
-    shop.loadingSpinner()
-    await model.loadData()
-    shop.removeLoadingSpinner()
-    shop.renderPagination(model.state.totalPages)
-    shop.renderItems(model.paginate(1))
-    shop.lazyLoading()
-  } catch (error) {
-    alert(error)
-  }
+  shop.loadingSpinner()
+  await model.loadData()
+  shop.removeLoadingSpinner()
+  shop.renderPagination(model.state.totalPages)
+  shop.renderItems(model.paginate(1))
+  shop.lazyLoading()
 }
 
 const renderDetailItem = async function () {
-  try {
-    detail.loadingSpinner()
-    await model.loadData()
-    detail.removeLoadingSpinner()
-    model.detailProduct(model.state.id)
-    detail.renderItem(model.state.detailItem)
-    detail.lazyLoading()
-    detail.addToCartHandler(model.state.detailItem, addToCartController)
-  } catch (error) {
-    alert(error)
-  }
+  detail.loadingSpinner()
+  await model.loadData()
+  detail.removeLoadingSpinner()
+  model.detailProduct(model.state.id)
+  detail.renderItem(model.state.detailItem)
+  detail.lazyLoading()
+  detail.addToCartHandler(model.state.detailItem, addToCartController)
 }
 
 const paginationController = async function (pageNumber) {
