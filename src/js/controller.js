@@ -29,6 +29,7 @@ const renderDetailItem = async function () {
 
 const paginationController = async function (pageNumber) {
   shop.renderItems(model.paginate(pageNumber))
+  shop.lazyLoading()
 }
 
 const getProductDetailController = function (id) {
