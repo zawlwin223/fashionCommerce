@@ -15,6 +15,7 @@ const renderShopItems = async function () {
     shop.removeLoadingSpinner()
     shop.renderPagination(model.state.totalPages)
     shop.renderItems(model.paginate(1))
+    shop.lazyLoading()
   } catch (error) {
     alert(error)
   }
@@ -27,6 +28,7 @@ const renderDetailItem = async function () {
     detail.removeLoadingSpinner()
     model.detailProduct(model.state.id)
     detail.renderItem(model.state.detailItem)
+    detail.lazyLoading()
     detail.addToCartHandler(model.state.detailItem, addToCartController)
   } catch (error) {
     alert(error)

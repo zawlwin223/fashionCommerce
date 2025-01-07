@@ -1,3 +1,5 @@
+import lazyLoadingImg from '../../img/vecteezy_picture-gallery-image-line-icon-vector-illustration_4853306-1.jpg'
+
 const itemsParent = document.querySelector('.items')
 const paginationParent = document.querySelector('.pagnination')
 
@@ -7,8 +9,11 @@ export const renderItems = function (items) {
     let card = `
       <div class="item_card">
         <img
+      src="${lazyLoadingImg}"
+      alt=""  class="lazy_loaded_img" />
+        <img
           src="${item.image}"
-          alt="" loading="lazy"
+          alt="" loading="lazy" class="shop_img"
         />
         <div class="detail">
           <h3>${item.title}</h3>
@@ -59,4 +64,15 @@ export const removeLoadingSpinner = function () {
   itemsParent.style.justifyContent = ''
   itemsParent.style.alignItems = ''
   itemsParent.innerHTML = ''
+}
+
+export const lazyLoading = function () {
+  const lazyLoadedImg = document.querySelectorAll('.lazy_loaded_img')
+  const lazyImagesFromServer = document.querySelectorAll('.shop_img')
+  lazyImagesFromServer.forEach((img, index) => {
+    img.addEventListener('load', () => {
+      img.style.display = 'block'
+      lazyLoadedImg[index].style.display = 'none'
+    })
+  })
 }

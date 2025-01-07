@@ -16,6 +16,15 @@
       width: 50%;
       height: auto;
     }
+    .lazy_loaded_img {
+      width: 50% !important;
+      height: auto;
+    }
+    .detail_img {
+      display: none;
+      width: 50%;
+      height: auto;
+    }
   }
   .detail_info {
     padding-top: calc(95px + 1rem);

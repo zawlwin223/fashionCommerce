@@ -1,7 +1,9 @@
+import lazyLoadingImg from 'url:../../img/vecteezy_picture-gallery-image-line-icon-vector-illustration_4853306-1.jpg'
+
 const detail_page = document.querySelector('.detail_page')
 const params = new URLSearchParams(window.location.search)
 const id = params.get('id')
-// const badge = document.querySelector('.badge')
+
 let amount = 0
 export const getItem = function (control) {
   if (!id) return
@@ -11,8 +13,11 @@ export const getItem = function (control) {
 export const renderItem = function (data) {
   const html = `<div class="image_part">
         <img
+          src="${lazyLoadingImg}"
+          alt=""  class="lazy_loaded_img" />
+        <img
           src="${data.image}"
-          alt="" loading="lazy"/>
+          alt="" loading="lazy" class="detail_img"/>
       </div>
       <article class="detail_info">
         <span><a class="nav_link" href="?page=shop">Shop</a>/ ${data.category}</span>
@@ -92,15 +97,20 @@ export const loadingSpinner = function () {
       <div class="lds-spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
     `
   detail_page.style.display = 'flex'
-  // detail_page.style.justifyContent = 'center'
-  // detail_page.style.alignItems = 'center'
   detail_page.style.height = '100vh'
 }
 export const removeLoadingSpinner = function () {
   detail_page.style.display = 'flex'
   detail_page.style.height = ''
-  // itemsParent.style.height = ''
-  // itemsParent.style.justifyContent = ''
-  // itemsParent.style.alignItems = ''
   detail_page.innerHTML = ''
+}
+
+export const lazyLoading = function () {
+  const lazyLoadedImg = document.querySelector('.lazy_loaded_img')
+  const lazyImageFromServer = document.querySelector('.detail_img')
+
+  lazyImageFromServer.addEventListener('load', () => {
+    lazyImageFromServer.style.display = 'block'
+    lazyLoadedImg.style.display = 'none'
+  })
 }

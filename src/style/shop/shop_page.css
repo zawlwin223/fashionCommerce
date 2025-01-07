@@ -27,9 +27,15 @@
       /* align-items: center; */
 
       img {
+        /* display: none; */
         width: 100px !important;
         margin-inline: auto;
         height: auto;
+      }
+      .lazy_loaded_img {
+        width: 100px !important;
+        height: 100px !important;
+        /* height: auto; */
       }
 
       .detail {
