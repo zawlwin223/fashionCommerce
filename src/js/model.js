@@ -1,11 +1,8 @@
 export const state = {
   items: [],
-  isLoading: true,
 }
 
 export const loadData = async function () {
-  state.isLoading = true
-
   const urls = [
     "https://fakestoreapi.com/products/category/men's clothing",
     "https://fakestoreapi.com/products/category/women's clothing",

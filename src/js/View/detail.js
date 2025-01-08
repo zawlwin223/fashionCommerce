@@ -32,7 +32,7 @@ export const renderItem = function (data) {
         <div>
           <div class="amount-container">
     <button class="amount-button amount-button-decrease" >-</button>
-    <input type="text" id="amount" class="amount-value" value="0"  readonly>
+    <input type="text" id="amount" class="amount-value" value="1"  readonly>
     <button class="amount-button amount-button-increase" >+</button>
   </div>
           <button class="add_to_cart">Add To Cart</button>
